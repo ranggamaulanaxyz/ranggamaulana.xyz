@@ -37,7 +37,7 @@ export async function api<T = any>(url: string, options: ApiOptions = {}) {
             await refreshToken(session);
             return await api<T>(endpoint, {...options, retry: false, session: session})
         } catch {
-            console.log("err");
+            return null
         }
     }
 
@@ -47,10 +47,6 @@ export async function api<T = any>(url: string, options: ApiOptions = {}) {
         data = await response.json();
     } catch {
         data = null
-    }
-
-    if (!response.ok) {
-        console.log("err");
     }
 
     return data as T

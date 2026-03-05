@@ -12,8 +12,8 @@ export async function loader({ request }: Route.LoaderArgs) {
     
     return data({
         session: {
-            user: results.item,
-            authenticated: true
+            user: results?.item,
+            authenticated: Boolean(results?.item)
         }
     }, {
         headers: {

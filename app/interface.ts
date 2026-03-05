@@ -16,6 +16,6 @@ interface User {
 }
 
 interface Session {
-    user: User,
+    user?: User,
     authenticated: boolean
 }
