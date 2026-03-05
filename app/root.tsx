@@ -22,10 +22,14 @@ export function meta({ error }: Route.MetaArgs) {
         return [{ title: "Forbidden" }];
       case 500:
         return [{ title: "Server Error" }];
+      default:
+        return [{ title: "Unexpected Error" }];
     }
   }
 
-  return [{ title: "Unexpected Error" }];
+  return [
+    {title: "Rangga Maulana - Welcome to My Website"}
+  ]
 }
 
 export const links: Route.LinksFunction = () => [

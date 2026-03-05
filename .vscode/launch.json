@@ -12,6 +12,13 @@
             "runtimeArgs": ["run", "dev", "--", "--host"],
             "console": "integratedTerminal",
             "autoAttachChildProcesses": true
+        },
+        {
+            "name": "Launch Chrome",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}"
         }
     ]
 }
