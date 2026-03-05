@@ -22,7 +22,10 @@ export function buildApiEndpoint(url: string): string {
 export async function api<T = any>(url: string, options: ApiOptions = {}) {
     const {session, retry, ...fetchOptions} = options;
     const endpoint = buildApiEndpoint(url);
-    const headers = new Headers(options.headers);
+    const headers = new Headers({
+        "Content-Type": "application/json",
+        ...options.headers
+    });
     if (session?.has("accessToken")) {
         const token = session?.get("accessToken");
         headers.set("Authorization", `Bearer ${token}`);

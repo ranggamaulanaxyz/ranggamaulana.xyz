@@ -1,5 +1,4 @@
-import { Session } from "inspector";
-import { createCookie, createCookieSessionStorage } from "react-router";
+import { createCookieSessionStorage } from "react-router";
 
 export type SessionData = {
     accessToken: string
