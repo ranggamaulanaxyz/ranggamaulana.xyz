@@ -32,10 +32,10 @@ export async function api<T = any>(url: string, options: ApiOptions = {}) {
         headers: headers
     })
 
-    if (response.status === 41 && retry) {
+    if (response.status === 401 && retry) {
         try {
-            await refreshToken();
-            return api<T>(endpoint, {...options, retry: false, session: session})
+            await refreshToken(session);
+            return await api<T>(endpoint, {...options, retry: false, session: session})
         } catch {
             console.log("err");
         }
@@ -56,10 +56,20 @@ export async function api<T = any>(url: string, options: ApiOptions = {}) {
     return data as T
 }
 
-async function refreshToken() {
+async function refreshToken(session?: Session<SessionData, SessionFlashData>) {
     const endpoint = buildApiEndpoint("/auth/token/refresh")
+    const refreshTokenValue = session?.get("refreshToken");
+    if (!refreshTokenValue) {
+        // nothing to refresh, throw early so caller can handle it
+        throw new Error("No refresh token available");
+    }
+
     const response = await fetch(endpoint, {
         method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ refresh_token: refreshTokenValue }),
     })
 
     let data: any = null
@@ -69,6 +79,8 @@ async function refreshToken() {
     } catch {
         data = null
     }
+
+    console.log(data)
 
     if (!response.ok) {
         throw new Response(JSON.stringify(data), {

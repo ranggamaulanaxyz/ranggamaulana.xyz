@@ -14,3 +14,8 @@ interface User {
     last_name: string,
     emails: UserEmail[],
 }
+
+interface Session {
+    user: User,
+    authenticated: boolean
+}

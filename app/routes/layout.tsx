@@ -8,9 +8,14 @@ import { sessionStorage } from "libraries/session.server";
 export async function loader({ request }: Route.LoaderArgs) {
     const headerCookie = request.headers.get("Cookie");
     const session = await sessionStorage.getSession(headerCookie);
-    const results = await api<Data<User>>("/users/me", {session: session});
+    const results = await api<Data<User>>("/users/me", {session: session, retry: true});
     
-    return data({user: results.item}, {
+    return data({
+        session: {
+            user: results.item,
+            authenticated: true
+        }
+    }, {
         headers: {
             "Set-Cookie": await sessionStorage.commitSession(session)
         }
@@ -18,10 +23,10 @@ export async function loader({ request }: Route.LoaderArgs) {
 }
 
 export default function Layout({loaderData}: Route.ComponentProps ) {
-    const { user } = loaderData;
+    const { session } = loaderData;
     return (
         <div>
-            <Header user={user} />
+            <Header session={session} />
             <Outlet />
             <Footer />
         </div>

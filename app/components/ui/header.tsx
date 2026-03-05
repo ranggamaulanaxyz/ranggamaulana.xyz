@@ -1,7 +1,7 @@
 import { LogIn, Menu } from "lucide-react";
 import { Link } from "react-router";
 
-export default function Header({user}: {user: User}) {
+export default function Header({session}: {session: Session}) {
     return (
         <header className="sticky top-0 bg-white border-b border-default-color text-gray-600">
             <div className="flex items-center justify-between px-4 relative">
@@ -16,9 +16,13 @@ export default function Header({user}: {user: User}) {
                         <li>
                             <Link to="/blog">Blog</Link>
                         </li>
-                        <li>
-                            <Link to="/signin">Sign in</Link>
-                        </li>
+                        {session.authenticated && (
+                            <li>{session.user.first_name}</li>
+                        ) || (
+                            <li>
+                                <Link to="/signin">Sign in</Link>
+                            </li>
+                        )}
                     </ul>
                     <ul className="flex items-center justify-center gap-4 md:hidden">
                         <li>
