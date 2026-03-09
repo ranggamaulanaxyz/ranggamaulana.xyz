@@ -39,12 +39,14 @@ interface PostTag {
 interface Post {
     public_id: string,
     title: string,
+    thumbnail_url: string,
     body: string,
     slug: string,
     excerpt: string,
-    categories: PostCategory[]
-    tags: PostTag[]
-    user_public_id: string
+    categories: PostCategory[],
+    tags: PostTag[],
+    user_public_id: string,
+    updated_at: string
 }
 
 interface Session {
