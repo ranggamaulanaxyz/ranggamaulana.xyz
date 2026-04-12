@@ -68,7 +68,7 @@ async function refreshToken(session?: Session<SessionData, SessionFlashData>) {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ refresh_token: refreshTokenValue }),
+        body: JSON.stringify({ token: refreshTokenValue }),
     })
 
     let data: any = null
