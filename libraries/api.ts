@@ -33,7 +33,12 @@ export async function api<T = any>(url: string, options: ApiOptions = {}) {
     const response = await fetch(endpoint, {
         ...fetchOptions,
         headers: headers
+    }).catch((reason) => {
+        console.error(reason)
+        return null
     })
+
+    if (!response) return null
 
     if (response.status === 401 && retry) {
         try {
@@ -78,8 +83,6 @@ async function refreshToken(session?: Session<SessionData, SessionFlashData>) {
     } catch {
         data = null
     }
-
-    console.log(data)
 
     if (!response.ok) {
         throw new Response(JSON.stringify(data), {

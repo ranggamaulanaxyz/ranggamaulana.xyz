@@ -1,14 +1,38 @@
+import { Building2, Cable, Globe, Server } from "lucide-react";
+import type React from "react";
 import { Link } from "react-router";
+
+function Card({
+  title,
+  children,
+  icon: Icon,
+}: {
+  title: string;
+  children: React.ReactNode;
+  icon: React.ElementType;
+}) {
+  return (
+    <div className="rounded border border-gray-200">
+      <div className="p-4">
+        <span className="inline-block rounded bg-gray-200 p-1 text-gray-700">
+          <Icon />
+        </span>
+        <h3 className="text-lg">{title}</h3>
+        <p className="text-sm text-gray-700">{children}</p>
+      </div>
+    </div>
+  );
+}
 
 export function WelcomePage() {
   return (
     <main className="min-h-screen">
       <section
-        className="relative bg-right bg-no-repeat"
+        className="relative bg-right bg-no-repeat py-8"
         style={{ backgroundImage: "url('/background.png')" }}
       >
         <div className="absolute inset-0 bg-linear-to-b from-white via-transparent/99 to-white"></div>
-        <div className="relative container lg:flex lg:flex-row-reverse lg:justify-between xl:mx-auto 2xl:items-center">
+        <div className="relative container mx-auto lg:flex lg:flex-row-reverse lg:justify-between 2xl:items-center">
           <div className="hidden p-4 lg:flex lg:items-start">
             <img
               src="/picture.jpeg"
@@ -57,8 +81,29 @@ export function WelcomePage() {
           </div>
         </div>
       </section>
-      <section>
-        
+      <section className="container mx-auto py-8">
+        <div className="p-4">
+          <h2 className="mb-3 text-xl font-extrabold uppercase md:text-2xl">
+            What I can Help You Build
+          </h2>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <Card title="ERP Development" icon={Building2}>
+              Custom modules and app (Odoo or ERPNext), Business Process
+              Automation, Accounting & operations systems.
+            </Card>
+            <Card title="Fullstack Web Development" icon={Globe}>
+              React / React Router v7 / Next.js applications, Admin dashboards,
+              Company profile systems.
+            </Card>
+            <Card title="Backend & API Development" icon={Cable}>
+              FastAPI REST API, Authentication systems, Database design.
+            </Card>
+            <Card title="Infrastructure & Deployment" icon={Server}>
+              VPS setup & maintenance, Cloud hosting configuration, Docker &
+              deployment pipelines.
+            </Card>
+          </div>
+        </div>
       </section>
     </main>
   );
