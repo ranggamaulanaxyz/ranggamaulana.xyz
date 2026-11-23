@@ -1,3 +1,6 @@
 [submodule "www"]
 	path = www
 	url = git@github.com:ranggamaulanaxyz/www.git
+[submodule "ai"]
+	path = ai
+	url = git@github.com:ranggamaulanaxyz/ai.git
