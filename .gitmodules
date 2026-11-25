@@ -3,4 +3,4 @@
 	url = git@github.com:ranggamaulanaxyz/www.git
 [submodule "ai"]
 	path = ai
-	url = https://github.com/ranggamaulanaxyz/ai.git
+	url = git@github.com:ranggamaulanaxyz/ai.git
